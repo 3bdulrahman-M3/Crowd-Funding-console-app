@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "owner": "abdo@gmail.com",
+    "title": "testing",
+    "details": "test edit",
+    "target": 3000.0,
+    "start_date": "2025-5-14",
+    "end_date": "2025-6-5"
+  }
+]
