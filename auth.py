@@ -52,12 +52,15 @@ def register():
 
 def login():
     print("\n--- Login ---")
-    email = input("Email: ")
-    password = input("Password: ")
-    users = load_users()
-    for user in users:
-        if user['email'] == email and user['password'] == password:
-            print(f"Welcome, {user['first_name']}!")
-            return user
-    print("Invalid email or password.")
-    return None 
+    while True:
+        email = input("Email: ")
+        password = input("Password: ")
+        users = load_users()
+        for user in users:
+            if user['email'] == email and user['password'] == password:
+                print(f"Welcome, {user['first_name']}!")
+                return user
+        print("Invalid email or password. Please try again.")
+        retry = input("Do you want to try again? (y/n): ").strip().lower()
+        if retry != 'y':
+            return None 
