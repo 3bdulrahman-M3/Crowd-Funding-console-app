@@ -44,19 +44,23 @@ def create_project(user):
     print("\n--- Create Project ---")
     title = input("Title: ")
     details = input("Details: ")
-    target = input("Total target (EGP): ")
-    try:
-        target = float(target)
-    except ValueError:
-        print("Invalid target amount.")
-        return
-    start_date = input("Start date (YYYY-MM-DD): ")
-    end_date = input("End date (YYYY-MM-DD): ")
-    start = validate_date(start_date)
-    end = validate_date(end_date)
-    if not start or not end or end <= start:
-        print("Invalid date(s) or end date before start date.")
-        return
+    while True:
+        target = input("Total target (EGP): ")
+        try:
+            target = float(target)
+        except ValueError:
+            print("Invalid target amount. Please try again.")
+            continue
+        break
+    while True:
+        start_date = input("Start date like (2025-5-1): ")
+        end_date = input("End date like (2025-5-1): ")
+        start = validate_date(start_date)
+        end = validate_date(end_date)
+        if not start or not end or end <= start:
+            print("Invalid date(s) or end date before start date. Please try again.")
+            continue
+        break
     projects = load_projects()
     project = {
         'id': len(projects) + 1,
@@ -96,19 +100,28 @@ def edit_project(user):
             print("Leave blank to keep current value.")
             title = input(f"Title [{p['title']}]: ") or p['title']
             details = input(f"Details [{p['details']}]: ") or p['details']
-            target = input(f"Target [{p['target']}]: ") or p['target']
-            try:
-                target = float(target)
-            except ValueError:
-                print("Invalid target amount.")
-                return
-            start_date = input(f"Start date [{p['start_date']}]: ") or p['start_date']
-            end_date = input(f"End date [{p['end_date']}]: ") or p['end_date']
-            start = validate_date(start_date)
-            end = validate_date(end_date)
-            if not start or not end or end <= start:
-                print("Invalid date(s) or end date before start date.")
-                return
+            while True:
+                target_input = input(f"Target [{p['target']}]: ")
+                if target_input == '':
+                    target = p['target']
+                    break
+                try:
+                    target = float(target_input)
+                except ValueError:
+                    print("Invalid target amount. Please try again.")
+                    continue
+                break
+            while True:
+                start_date_input = input(f"Start date [{p['start_date']}]: ")
+                end_date_input = input(f"End date [{p['end_date']}]: ")
+                start_date = start_date_input or p['start_date']
+                end_date = end_date_input or p['end_date']
+                start = validate_date(start_date)
+                end = validate_date(end_date)
+                if not start or not end or end <= start:
+                    print("Invalid date(s) or end date before start date. Please try again.")
+                    continue
+                break
             p['title'] = title
             p['details'] = details
             p['target'] = target
