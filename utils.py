@@ -2,7 +2,7 @@ import re
 from datetime import datetime
 
 def validate_phone_number(phone):
-    return bool(re.fullmatch(r"\d{9,}", phone))
+    return bool(re.fullmatch(r"01[0-9]{9}", phone))
 
 def validate_email(email):
     return bool(re.fullmatch(r"[^@\s]+@[^@\s]+\.[a-zA-Z0-9]+$", email))
